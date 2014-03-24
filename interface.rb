@@ -39,8 +39,11 @@ def add_task
   puts "Which list does this task belong to?"
   List.all.each { |list| puts list.name }
   list_name = gets.chomp
-  list_id = List.where(:name => list_name).first['id']
-  task = Task.new({:name => task_name, :done => false, :list_id => list_id})
+  list_id1 = List.where(:name => list_name).first['id']
+  # Or either of these:
+  # list_id2 = List.find_by_name(list_name).id
+  # list_id3 = List.find_by(:name => list_name).id
+  task = Task.new({:name => task_name, :done => false, :list_id => list_id1})
   task.save
   "'#{task_name}' has been added to your To Do list."
 end
